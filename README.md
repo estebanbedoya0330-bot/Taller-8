@@ -1,6 +1,8 @@
 # Taller-8
+
 # EJERCICIO 1:
 
+```python
 ventas = [
     [12, 15, 10, 18],
     [8, 14, 16, 12],
@@ -9,71 +11,44 @@ ventas = [
 
 # 1. Mostrar la matriz completa
 print("===== MATRIZ DE VENTAS =====")
-
 for i in range(len(ventas)):
-    print("Vendedor", i + 1, ":", ventas[i])
+    print(f"Vendedor {i + 1}: {ventas[i]}")
 
 # 2. Total de ventas por vendedor
 print("\n===== TOTAL POR VENDEDOR =====")
-
 totales_vendedores = []
-
 for i in range(len(ventas)):
-    total = 0
-    for j in range(len(ventas[i])):
-        total += ventas[i][j]
-
+    total = sum(ventas[i])
     totales_vendedores.append(total)
-    print("Vendedor", i + 1, ":", total, "millones")
+    print(f"Vendedor {i + 1}: {total} millones")
 
 # 3. Total de ventas por semana
 print("\n===== TOTAL POR SEMANA =====")
-
 totales_semanas = []
-
-for j in range(4):
-    total = 0
-    for i in range(3):
-        total += ventas[i][j]
-
+for j in range(len(ventas[0])):
+    total = sum(fila[j] for fila in ventas)
     totales_semanas.append(total)
-    print("Semana", j + 1, ":", total, "millones")
+    print(f"Semana {j + 1}: {total} millones")
 
 # 4. Vendedor con mayores ventas
-mayor_vendedor = totales_vendedores.index(
-    max(totales_vendedores)
-)
-
+mayor_vendedor = totales_vendedores.index(max(totales_vendedores))
 print("\n===== MAYOR VENDEDOR =====")
-print("Vendedor", mayor_vendedor + 1,
-      "con", max(totales_vendedores), "millones")
+print(f"Vendedor {mayor_vendedor + 1} con {max(totales_vendedores)} millones")
 
 # 5. Semana con mayor volumen de ventas
-mayor_semana = totales_semanas.index(
-    max(totales_semanas)
-)
-
+mayor_semana = totales_semanas.index(max(totales_semanas))
 print("\n===== MAYOR SEMANA =====")
-print("Semana", mayor_semana + 1,
-      "con", max(totales_semanas), "millones")
+print(f"Semana {mayor_semana + 1} con {max(totales_semanas)} millones")
 
 # 6. Promedio general
-suma_general = 0
-cantidad = 0
-
-for fila in ventas:
-    for valor in fila:
-        suma_general += valor
-        cantidad += 1
-
+suma_general = sum(valor for fila in ventas for valor in fila)
+cantidad = sum(len(fila) for fila in ventas)
 promedio = suma_general / cantidad
-
 print("\n===== PROMEDIO GENERAL =====")
-print("Promedio:", round(promedio, 2), "millones")
+print(f"Promedio: {round(promedio, 2)} millones")
 
 # 7. Modificar una venta
 print("\n===== MODIFICAR UNA VENTA =====")
-
 vendedor = int(input("Ingrese el vendedor (1, 2 o 3): "))
 semana = int(input("Ingrese la semana (1, 2, 3 o 4): "))
 nuevo_valor = float(input("Ingrese el nuevo valor: "))
@@ -87,35 +62,24 @@ if 1 <= vendedor <= 3 and 1 <= semana <= 4 and nuevo_valor >= 0:
 
     print("\nNuevos totales por vendedor:")
     for i in range(len(ventas)):
-        total = 0
-        for valor in ventas[i]:
-            total += valor
-        print("Vendedor", i + 1, ":", total)
+        total = sum(ventas[i])
+        print(f"Vendedor {i + 1}: {total}")
 
     print("\nNuevos totales por semana:")
-    for j in range(4):
-        total = 0
-        for i in range(3):
-            total += ventas[i][j]
-        print("Semana", j + 1, ":", total)
+    for j in range(len(ventas[0])):
+        total = sum(fila[j] for fila in ventas)
+        print(f"Semana {j + 1}: {total}")
 
-    suma_general = 0
-    cantidad = 0
-
-    for fila in ventas:
-        for valor in fila:
-            suma_general += valor
-            cantidad += 1
-
-    print("Nuevo promedio general:",
-          round(suma_general / cantidad, 2))
-
+    suma_general = sum(valor for fila in ventas for valor in fila)
+    cantidad = sum(len(fila) for fila in ventas)
+    print(f"\nNuevo promedio general: {round(suma_general / cantidad, 2)}")
 else:
     print("Datos ingresados incorrectamente.")
+```
 
+# EJERCICIO 2:
 
-# EJERCICIO 2: 
-
+```python
 curso_A = {
     "Ana", "Carlos", "Laura", "Pedro",
     "Sofia", "Andres", "Camila"
@@ -133,37 +97,31 @@ print("Curso B:", curso_B)
 
 # 2. Cantidad de estudiantes diferentes
 todos = curso_A | curso_B
-
 print("\n===== TOTAL DE ESTUDIANTES =====")
 print("Cantidad de estudiantes diferentes:", len(todos))
 
 # 3. Estudiantes inscritos en ambos cursos
 ambos = curso_A & curso_B
-
 print("\n===== ESTUDIANTES EN AMBOS CURSOS =====")
 print(ambos)
 
 # 4. Estudiantes únicamente del curso A
 solo_A = curso_A - curso_B
-
 print("\n===== SOLO CURSO A =====")
 print(solo_A)
 
 # 5. Estudiantes únicamente del curso B
 solo_B = curso_B - curso_A
-
 print("\n===== SOLO CURSO B =====")
 print(solo_B)
 
 # 6. Estudiantes inscritos exactamente en uno
 exactamente_uno = curso_A ^ curso_B
-
 print("\n===== ESTUDIANTES EN EXACTAMENTE UN CURSO =====")
 print(exactamente_uno)
 
 # 7. Determinar si todos los estudiantes de A están en B
 print("\n===== COMPROBACION =====")
-
 if curso_A.issubset(curso_B):
     print("Todos los estudiantes del curso A están en el curso B.")
 else:
@@ -171,18 +129,15 @@ else:
 
 # 8. Agregar un nuevo estudiante
 print("\n===== AGREGAR ESTUDIANTE =====")
-
 nombre = input("Ingrese el nombre del estudiante: ")
 curso = input("¿A qué curso desea agregarlo? (A/B): ").upper()
 
 if curso == "A":
     curso_A.add(nombre)
     print("Estudiante agregado al curso A.")
-
 elif curso == "B":
     curso_B.add(nombre)
     print("Estudiante agregado al curso B.")
-
 else:
     print("Curso no válido.")
 
@@ -190,7 +145,6 @@ else:
 print("\n===== RESULTADOS ACTUALIZADOS =====")
 print("Curso A:", curso_A)
 print("Curso B:", curso_B)
-
 print("Total de estudiantes:", len(curso_A | curso_B))
 print("Estudiantes en ambos cursos:", curso_A & curso_B)
 print("Solo curso A:", curso_A - curso_B)
@@ -201,3 +155,4 @@ if curso_A.issubset(curso_B):
     print("Todos los estudiantes de A están en B.")
 else:
     print("No todos los estudiantes de A están en B.")
+```
